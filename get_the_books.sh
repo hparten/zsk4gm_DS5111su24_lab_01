@@ -8,6 +8,10 @@ BASE_URL="https://www.gutenberg.org/cache/epub"
 
 # Loop through Book_IDs to download texts
 for BOOK_ID in "${BOOK_IDS[@]}"; do
-    wget "${BASE_URL}/${BOOK_ID}/pg${BOOK_ID}.txt"
-
+	FILE="pg${BOOK_ID}.txt"
+	if [ ! -f "$FILE" ]; then 
+		 wget "${BASE_URL}/${BOOK_ID}/pg${BOOK_ID}.txt"
+	else
+		echo "$FILE already exists, skipping download."
+	fi
 done

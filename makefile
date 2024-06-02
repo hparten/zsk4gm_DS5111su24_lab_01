@@ -2,7 +2,7 @@ default:
 	cat Makefile
 
 get_texts:
-	bash get_books.sh
+	bash get_the_books.sh
 
 raven_line_count: 
 	@echo "Line count in The Raven"
