@@ -3,3 +3,25 @@ default:
 
 get_texts:
 	bash get_books.sh
+
+raven_line_count: 
+	@echo "Line count in The Raven"
+	@cat pg17192.txt | wc -l 
+
+raven_word_count:
+	@echo "Word count in The Raven"
+	@cat pg17192.txt | wc -w
+
+raven_counts: 
+	@echo "Lowercase 'raven' count:"
+	@cat pg17192.txt | grep 'raven' | wc -l
+	@echo "Titlecase 'Raven' count:"
+	@cat pg17192.txt | grep 'Raven' | wc -l 
+	@echo "Case-insensitive 'raven' count:"
+	@cat pg17192.txt | grep -i 'raven' | wc -l
+
+total_lines:
+	@cat *.txt | wc -l
+
+total_words:
+	@cat *.txt | wc -w
