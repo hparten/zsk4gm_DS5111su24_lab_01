@@ -1,6 +1,6 @@
 import string
 import logging
-
+from collections import Counter
 
 logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
 
@@ -22,7 +22,8 @@ def tokenize(text):
 	assert isinstance(text, str), 'Input must be a string'
 	logging.debug(f'Tokenizing text: {text}')
 	
-	words = text.split()
+	cleaned_text = clean_text(text)
+	words = clean_text.split()
 	
 	assert isinstance(words, list), 'Output must be a list'	
 	assert all(isinstance(word, str) for word in words), 'All words in list must be strings' 
@@ -34,15 +35,9 @@ def count_words(text):
     assert isinstance(text, str), 'Input must be a string'
     logging.debug(f'Counting words in text {text}')
 
-    cleaned_text = clean_text(text)
     tokens = tokenize(cleaned_text)
 
-    word_count = {}
-    for word in tokens:
-        if word in word_count:
-            word_count[word] += 1
-        else:
-            word_count[word] = 1
+    word_count = Counter(tokens)
 
     assert isinstance(word_count, dict), 'Output must be a dict'
     assert all(isinstance(word, str) for word in word_count.keys()), 'All keys must be str'
