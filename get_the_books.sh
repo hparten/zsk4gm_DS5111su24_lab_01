@@ -11,7 +11,7 @@ mkdir -p books
 for BOOK_ID in "${BOOK_IDS[@]}"; do
 	FILE="books/pg${BOOK_ID}.txt"
 	if [ ! -f "$FILE" ]; then 
-		 wget -0 "$FILE" "${BASE_URL}/${BOOK_ID}/pg${BOOK_ID}.txt"
+		 wget -O "$FILE" "${BASE_URL}/${BOOK_ID}/pg${BOOK_ID}.txt"
 	else
 		echo "$FILE already exists, skipping download."
 	fi

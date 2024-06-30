@@ -3,9 +3,10 @@ import subprocess
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from process_text import clean_text
+from process_text import clean_text, tokenize, count_words
 import platform
 import string
+from collections import Counter
 
 @pytest.fixture
 def sample_text():
@@ -86,87 +87,81 @@ def french_text():
 
 
 # Test of the sample English text
-def test_clean_text(sample_text):
+def test_counter(sample_text):
     # Given a text string
-    # When the text is cleaned
-    cleaned = clean_text(sample_text)
-    # Then the text should have no punctuation, be in lowercase, and be a string
-    assert all(char not in string.punctuation for char in cleaned)
-    assert cleaned == cleaned.lower()
-    assert isinstance(cleaned, str)
+    # When the text is tokenized
+    counts = count_words(sample_text)
+    # Then the expected output should be a dictionary of counts for each unique token
+    assert counts == {'but':1,'the':2, 'raven':1, 'sitting':1, 'lonely':1, 'on':1, 'placid':1,
+		      'bust':1, 'spoke':1, 'only':1, 'that':2, 'one':2, 'word':2, 'as':1, 'if':1, 'his':1, 'soul':1,
+		      'in':1, 'he':1, 'did':1, 'outpour':1}
+    assert isinstance(counts, dict), f"Tokenizer output is the incorrect dtype"
+    assert counts == Counter(tokenize(sample_text))
+
 
 
 # Test of the input type that is expected to fail
 @expected_to_fail
-def test_clean_text_intended_failure_type():
+def test_counter_intended_failure_type():
     # Given an integer instead of a string
     # When the text is cleaned
     # Then an assertion error should be raised
     with pytest.raises(AssertionError):
-        clean_text(123)
+        Counter(123)
 
 
 # Test to check function on just the Raven
-def test_clean_text_raven(raven_text):
+def test_counter_raven(raven_text):
     # Given a text string
-    # When the text is cleaned
-    cleaned = clean_text(raven_text)
-    # Then the text should have no punctuation, be in lowercase, and be a string
-    assert all(char not in string.punctuation for char in cleaned)
-    assert cleaned == cleaned.lower()
-    assert isinstance(cleaned, str)
+    # When the text is tokenized
+    counts = count_words(raven_text)
+    # Then the expected output should be a dictionary of counts for each unique token
+    assert isinstance(counts, dict), f"Tokenizer output is the incorrect dtype"
+    assert counts == Counter(tokenize(raven_text))
 
 
 # Test to check function on each English text separately
 @pytest.mark.parametrize("filename", ENGLISH_FILES)
-def test_clean_text_english_files(filename, read_file):
+def test_counter_english_files(filename, read_file):
     # Given the text from a file
-    text = read_file(filename)
-    # When the text is cleaned
-    cleaned = clean_text(text)
-    # Then the text should have no punctuation, be in lowercase, and be a string
-    assert all(char not in string.punctuation for char in cleaned)
-    assert cleaned == cleaned.lower()
-    assert isinstance(cleaned, str)
+    counts = count_words(filename)
+    # Then the expected output should be a dictionary of counts for each unique token
+    assert isinstance(counts, dict), f"Tokenizer output is the incorrect dtype"
+    assert counts == Counter(tokenize(filename))
 
 
 # Test to check function on all English texts combined
-def test_clean_text_combined(combined_text):
+def test_counter_combined(combined_text):
     # Given a text string
-    # When the text is cleaned
-    cleaned = clean_text(combined_text)
-    # Then the text should have no punctuation, be in lowercase, and be a string
-    assert all(char not in string.punctuation for char in cleaned)
-    assert cleaned == cleaned.lower()
-    assert isinstance(cleaned, str)
+    # When the text is tokenized
+    counts = count_words(combined_text)
+    # Then the expected output should be a dictionary of counts for each unique token
+    assert isinstance(counts, dict), f"Tokenizer output is the incorrect dtype"
+    assert counts == Counter(tokenize(combined_text))     
 
 
 # Test to check function on Le Corbeau text
-def test_clean_text_french(french_text):
+def test_counter_french(french_text):
     # Given a text string
-    # When the text is cleaned
-    cleaned = clean_text(french_text)
-    # Then the text should have no punctuation, be in lowercase, and be a string
-    assert all(char not in string.punctuation for char in cleaned)
-    assert cleaned == cleaned.lower()
-    assert isinstance(cleaned, str)
-
+    # When the text is tokenized
+    counts = count_words(french_text)
+    # Then the expected output should be a dictionary of counts for each unique token   
+    assert isinstance(counts, dict), f"Tokenizer output is the incorrect dtype"
+    assert counts == Counter(tokenize(french_text))
 
 # Test for future Japanese version, marked to be skipped
 @pytest.mark.skip(reason="Japanese version is not ready yet")
-def test_clean_text_japanese():
+def test_counter_japanese():
     # Given a Japanese text
     japanese_text = "insert Japanese text here"
-    # When the text is cleaned
-    cleaned = clean_text(japanese_text)
-    # Then the text should have no punctuation, be in lowercase, and be a string
-    assert all(char not in string.punctuation for char in cleaned)
-    assert cleaned == cleaned.lower()
-    assert isinstance(cleaned, str)
-
+    # When the text is passed to count_words
+    counts = count_words(japanese_text)
+    # Then the expected output should be a dictionary of counts for each unique token
+    assert isinstance(counts, dict), f"Tokenizer output is the incorrect dtype"
+    assert counts == Counter(tokenize(japanese_text))
 
 # Test to check if the OS is supported
-def test_os():
+def test_os_supported():
     # Given the list of supported os and the current os
     supported_os = ["Linux"]
     current_os = platform.system()
@@ -188,7 +183,6 @@ def test_python_version():
     # The the supported version fall within the min and max version
     if not (min_version <= current_version <= max_version):
         pytest.fail(f"Tests have not been verified on the current Python version: {current_version}. Supported versions are from {min_version} to {max_version}.")
-
     else:
         assert True
 
@@ -196,13 +190,18 @@ def test_python_version():
 # Test to compare function against bash command
 def test_clean_text_with_bash(sample_text):
     # Given a cleaned text string  using function
-    expected_cleaned = clean_text(sample_text)
+    expected_counts = count_words(sample_text)
 
-    # When a Bash command is used to clean text string
-    bash_command = f'echo "{sample_text}" | tr "[:upper:]" "[:lower:]" | tr -d "[:punct:]"'
+    # When a Bash command is used to count words
+    bash_command = f"echo \"{sample_text}\" | tr '[:upper:]' '[:lower:]' | tr -d '[:punct:]' | tr ' ' '\n' | sort | uniq -c"
     result = subprocess.run(bash_command, shell=True, capture_output=True, text=True)
-    bash_cleaned = result.stdout.strip()
+    bash_output = result.stdout.strip()
 
+    # Convert bash output to a Counter
+    bash_counts = Counter()
+    for line in bash_output.split('\n'):
+        count, word = line.strip().split()
+        bash_counts[word] = int(count)
+    
     # Then the two cleaned text strings should be the same
-    assert expected_cleaned == bash_cleaned, f"Bash result: {bash_cleaned} != Function result: {expected_cleaned}"
-  
+    assert expected_counts == bash_counts, f"Bash result: {bash_counts} != Function result: {expected_counts}"

@@ -23,7 +23,7 @@ def tokenize(text):
 	logging.debug(f'Tokenizing text: {text}')
 	
 	cleaned_text = clean_text(text)
-	words = clean_text.split()
+	words = cleaned_text.split()
 	
 	assert isinstance(words, list), 'Output must be a list'	
 	assert all(isinstance(word, str) for word in words), 'All words in list must be strings' 
@@ -35,7 +35,7 @@ def count_words(text):
     assert isinstance(text, str), 'Input must be a string'
     logging.debug(f'Counting words in text {text}')
 
-    tokens = tokenize(cleaned_text)
+    tokens = tokenize(text)
 
     word_count = Counter(tokens)
 
