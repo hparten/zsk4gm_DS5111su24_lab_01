@@ -3,7 +3,7 @@ default:
 
 get_texts:
 	@echo "Getting books..."
-	/bin/bash ../get_the_books.sh
+	/bin/bash get_the_books.sh
 
 raven_line_count: 
 	@echo "Line count in The Raven"
