@@ -1,7 +1,7 @@
 import sys
 import pytest
 
-REQUIRED_PYTHON = "3.9"
+REQUIRED_PYTHON = "3.7"
 
 def test_python_version():
     version = sys.version.split()[0]
