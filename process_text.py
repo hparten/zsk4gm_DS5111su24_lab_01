@@ -13,10 +13,9 @@ def clean_text(text):
 	cleaned_text = text.translate(str.maketrans('', '', string.punctuation))
 	
 	assert isinstance(cleaned_text, str), 'Output must be a string'
-	assert cleaned_text, 'Check output text is not None'
 	logging.debug(f'Cleaned text: {cleaned_text}')
 	
-	return cleaned_text
+	return cleaned_text or ""
 
 def tokenize(text):
 	assert isinstance(text, str), 'Input must be a string'
