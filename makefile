@@ -28,7 +28,7 @@ total_words:
 	@cat *.txt | wc -w
 
 setup: 
-	python3 -m venv env
+	python3.9 -m venv env
 	./env/bin/pip install --upgrade pip 
 	./env/bin/pip install -r requirements.txt
 
