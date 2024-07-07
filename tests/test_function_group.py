@@ -6,6 +6,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from process_text import clean_text, tokenize, count_words
 
+@pytest.mark.integration
 def test_integration():
     # Test input
     input_text = "Hello, World! This is a test. Hello again."
@@ -23,6 +24,7 @@ def test_integration():
     expected_counts = Counter({"hello": 2, "world": 1, "this": 1, "is": 1, "a": 1, "test": 1, "again": 1})
     assert word_counts == expected_counts
 
+@pytest.mark.integration
 @pytest.mark.parametrize("input_text, expected_clean, expected_tokens, expected_counts", [
     ("", "", [], {}),
     ("!@#$%^&*()", "", [], {}),
