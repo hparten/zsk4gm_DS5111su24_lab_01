@@ -62,11 +62,3 @@ def test_failing_case():
     word_counts = count_words(input_text)
     assert word_counts == expected_counts, f"Expected word counts to be '{expected_counts}', but got '{word_counts}'"
 
-# Additional step to cat the logs if a test fails
-def pytest_runtest_makereport(item, call):
-    if call.excinfo is not None:
-        # This runs only if the test fails
-        if os.path.exists(log_file_path):
-            with open(log_file_path, 'r') as log_file:
-                logs = log_file.read()
-                print(f"\n\nLOGS:\n{logs}\n\n")
