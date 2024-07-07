@@ -1,4 +1,3 @@
-pylint 
 attrs
 Automat
 Babel
@@ -8,17 +7,11 @@ blinker
 certifi
 chardet
 click
-cloud-init
 colorama
-command-not-found
 configobj
 constantly
 cryptography
-dbus-python
 distro
-distro-info
-ec2-hibinit-agent
-hibagent
 httplib2
 hyperlink
 idna
@@ -28,9 +21,6 @@ Jinja2
 jsonpatch
 jsonpointer
 jsonschema
-launchpadlib
-lazr.restfulclient
-lazr.uri
 markdown-it-py
 MarkupSafe
 mdurl
@@ -53,8 +43,6 @@ pyparsing
 pyrsistent
 pyserial
 pytest
-python-apt
-python-debian
 python-magic
 pytz
 PyYAML
@@ -63,14 +51,8 @@ rich
 service-identity
 setuptools
 six
-sos
-ssh-import-id
-systemd-python
 Twisted
 typing_extensions
-ubuntu-pro-client
-ufw
-unattended-upgrades
 urllib3
 wadllib
 wheel
