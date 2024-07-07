@@ -2,7 +2,9 @@ import string
 import logging
 from collections import Counter
 
-logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
+root_dir = os.path.dirname(os.path.abspath(__file__))  # This gets the directory of the current script
+log_file_path = os.path.join(root_dir, 'logs', 'logfile.log')
+logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s', filename=log_file_path)
 
 
 def clean_text(text):
