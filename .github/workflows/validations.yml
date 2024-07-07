@@ -39,6 +39,3 @@ jobs:
       - name: Display logs on failure
         if: failure()
         run: cat test-results.xml
-      - name: Fail the workflow if tests failed
-        if: failure()
-        run: exit 1
