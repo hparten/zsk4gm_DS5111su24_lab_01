@@ -1,6 +1,7 @@
 import string
 import logging
 from collections import Counter
+import os
 
 root_dir = os.path.dirname(os.path.abspath(__file__))  # This gets the directory of the current script
 log_file_path = os.path.join(root_dir, 'logs', 'logfile.log')
