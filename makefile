@@ -32,6 +32,10 @@ setup:
 	./env/bin/pip install --upgrade pip 
 	./env/bin/pip install -r requirements.txt
 
+test:
+	@echo "Running non-integration tests..."
+	pytest -v -m "not integration"
+
 clean: 
 	@echo "Removing books..."
 	rm -rf books/	
