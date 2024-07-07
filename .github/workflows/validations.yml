@@ -29,7 +29,7 @@ jobs:
           make setup
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run Python version check
-        run: pytest -v test_python_version.py
+        run: pytest -v tests/test_python_version.py
       - name: Run non-integration tests
         if: github.event_name == 'push' || github.event.inputs.run_non_integration
         run: make test
