@@ -32,9 +32,13 @@ setup:
 	./env/bin/pip install --upgrade pip 
 	./env/bin/pip install -r requirements.txt
 
-test:
+lint:
+	@echo "Running linting..."
+	./env/bin/pylint src tests
+
+test: lint
 	@echo "Running non-integration tests..."
-	pytest -v -m "not integration"
+	./en/bin/pytest -v -m "not integration"
 
 clean: 
 	@echo "Removing books..."
