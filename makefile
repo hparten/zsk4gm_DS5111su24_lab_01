@@ -38,7 +38,7 @@ lint:
 
 test: lint
 	@echo "Running non-integration tests..."
-	./en/bin/pytest -v -m "not integration"
+	./env/bin/pytest -v -m "not integration" tests/
 
 clean: 
 	@echo "Removing books..."
