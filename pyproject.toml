@@ -18,5 +18,5 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/"
-Issues = "https://github.com/"
+Homepage = "https://github.com/hparten/zsk4gm_DS5111su24_lab_01"
+Issues = "https://github.com/hparten/zsk4gm_DS5111su24_lab_01/issues"
