@@ -3,7 +3,7 @@ default:
 
 get_texts:
 	@echo "Getting books..."
-	/bin/bash /home/ubuntu/zsk4gm_DS5111su24_lab_01/get_the_books.sh
+	/bin/bash get_the_books.sh
 
 raven_line_count: 
 	@echo "Line count in The Raven"
@@ -28,9 +28,13 @@ total_words:
 	@cat *.txt | wc -w
 
 setup: 
-	python3 -m venv env
+	python3.7 -m venv env
 	./env/bin/pip install --upgrade pip 
 	./env/bin/pip install -r requirements.txt
+
+test:
+	@echo "Running non-integration tests..."
+	pytest -v -m "not integration"
 
 clean: 
 	@echo "Removing books..."

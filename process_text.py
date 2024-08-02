@@ -1,8 +1,11 @@
 import string
 import logging
 from collections import Counter
+import os
 
-logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
+root_dir = os.path.dirname(os.path.abspath(__file__))  # This gets the directory of the current script
+log_file_path = os.path.join(root_dir, 'logs', 'logfile.log')
+logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s', filename=log_file_path)
 
 
 def clean_text(text):
@@ -13,10 +16,9 @@ def clean_text(text):
 	cleaned_text = text.translate(str.maketrans('', '', string.punctuation))
 	
 	assert isinstance(cleaned_text, str), 'Output must be a string'
-	assert cleaned_text, 'Check output text is not None'
 	logging.debug(f'Cleaned text: {cleaned_text}')
 	
-	return cleaned_text
+	return cleaned_text or ""
 
 def tokenize(text):
 	assert isinstance(text, str), 'Input must be a string'
