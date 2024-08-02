@@ -2,7 +2,8 @@ default:
 	cat Makefile
 
 get_texts:
-	bash get_the_books.sh
+	@echo "Getting books..."
+	/bin/bash /home/ubuntu/zsk4gm_DS5111su24_lab_01/get_the_books.sh
 
 raven_line_count: 
 	@echo "Line count in The Raven"
@@ -30,3 +31,7 @@ setup:
 	python3 -m venv env
 	./env/bin/pip install --upgrade pip 
 	./env/bin/pip install -r requirements.txt
+
+clean: 
+	@echo "Removing books..."
+	rm -rf books/	

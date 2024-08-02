@@ -1,3 +1,11 @@
 
 #ignore all .txt files
 *.txt
+
+#ignore env
+env/
+
+# Other patterns can go here
+*.pyc
+__pycache__/
+*.log
