@@ -1,7 +1,27 @@
 [![Python package](https://github.com/hparten/zsk4gm_DS5111su24_lab_01/actions/workflows/validations.yml/badge.svg)](https://github.com/hparten/zsk4gm_DS5111su24_lab_01/actions/workflows/validations.yml)
 # zsk4gm_DS5111su24_lab_01
 
-### process_text.py
+### Installation 
+You can install `zsk4gm` directly from GitHub using `git+http`:
+
+```bash
+pip install git+http://github.com/hparten/zsk4gm_DS5111su24_lab_01@WEEK-06/installable_package
+
+### Example
+Here's a quick example of how to use `zsk4gm`:
+```
+
+```python
+import zsk4gm as pkg
+
+test_string = "Hello world, this is a test"
+
+print(pkg.clean_text(test_string)) 
+print(pkg.tokenize(test_string)) 
+print(pkg.count_words(test_string)) -> 
+```
+
+### zsk4gm
 This python module contain functions to process textual input
 
 1. `clean_text(text)` lowercases and removes punctuation from input string

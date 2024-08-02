@@ -28,13 +28,17 @@ total_words:
 	@cat *.txt | wc -w
 
 setup: 
-	python3.7 -m venv env
+	python3 -m venv env
 	./env/bin/pip install --upgrade pip 
 	./env/bin/pip install -r requirements.txt
 
-test:
+lint:
+	@echo "Running linting..."
+	./env/bin/pylint src tests
+
+test: lint
 	@echo "Running non-integration tests..."
-	pytest -v -m "not integration"
+	./env/bin/pytest -v -m "not integration" tests/
 
 clean: 
 	@echo "Removing books..."

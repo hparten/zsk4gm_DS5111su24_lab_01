@@ -2,10 +2,11 @@ import pytest
 import subprocess
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from process_text import clean_text
+sys.path.insert(0, 'src')  
+from zsk4gm.process_text import clean_text
 import platform
 import string
+
 
 @pytest.fixture
 def sample_text():
