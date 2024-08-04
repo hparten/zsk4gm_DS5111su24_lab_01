@@ -20,13 +20,13 @@ setup(
     install_requires=install_requires,
     entry_points={
         'console_scripts': [
-            'my-script=src/zsk4gm:process_text',  
+            'my-script=src/zsk4gm.process_text:clean_text',  
         ],
     },
     classifiers=[
         'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: MIT',
-        'Operating System :: Darwin',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
     ],
-    python_requires='>=3.8',  # Adjust based on your project's Python version requirements
+    python_requires='>=3.8', 
 )
