@@ -20,7 +20,7 @@ setup(
     install_requires=install_requires,
     entry_points={
         'console_scripts': [
-            'my-script=src/zsk4gm.process_text:clean_text',  
+            'my-script=zsk4gm.process_text:clean_text',  
         ],
     },
     classifiers=[
