@@ -19,7 +19,7 @@ setup(
     install_requires=install_requires,
     entry_points={
         'console_scripts': [
-            'my-script=zsk4gm:process_text',  # Replace with your module and function
+            'my-script=src/zsk4gm:process_text',  # Replace with your module and function
         ],
     },
     classifiers=[
