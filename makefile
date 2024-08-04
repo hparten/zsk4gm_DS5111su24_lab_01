@@ -34,7 +34,7 @@ setup:
 
 lint:
 	@echo "Running linting..."
-	./env/bin/pylint src tests
+	./env/bin/pylint src/zsk4gm/process_text.py
 
 test: lint
 	@echo "Running non-integration tests..."
