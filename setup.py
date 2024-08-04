@@ -13,14 +13,14 @@ setup(
     version="0.1.0", 
     description="A small example package.",
     author="Hallie Parten",
-    author_email="zsk4gm@virgnia.edu",  
+    author_email="zsk4gm@virginia.edu",  
     url="https://github.com/hparten/zsk4gm_DS5111su24_lab_01",  
     packages=find_packages(where='src'),
-    packages_dir={'': 'src'}, 
+    package_dir={'': 'src'}, 
     install_requires=install_requires,
     entry_points={
         'console_scripts': [
-            'my-script=src/zsk4gm.process_text:clean_text',  # Replace with your module and function
+            'my-script=src/zsk4gm:process_text',  
         ],
     },
     classifiers=[
