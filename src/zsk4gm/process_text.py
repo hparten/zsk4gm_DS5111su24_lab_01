@@ -5,9 +5,17 @@ from collections import Counter
 import os
 
 root_dir = os.path.dirname(os.path.abspath(__file__))
-log_file_path = os.path.join(root_dir, 'logs', 'logfile.log')
+log_dir = os.path.join(root_dir, 'logs')
+log_file_path = os.path.join(log_dir, 'logfile.log')
+
+# Ensure the log directory exists
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+# Set up logging
 logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s',
                     filename=log_file_path)
+
 
 def clean_text(text):
     """Clean the input text by removing punctuation and converting to lowercase."""
